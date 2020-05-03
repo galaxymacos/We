@@ -182,10 +182,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e818dc59c974d9c40b45f2c92f1deda2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NormalColliderHeight: 1.8
+  CrouchColliderHeight: 1.4
   walkSpeed: 3
   walkLimit: 0.3
   runSpeed: 6
   runLimit: 0.6
+  crouchSpeed: 0
   turnSmoothTime: 0.2
   speedSmoothTime: 0.1
   jumpForce: 10

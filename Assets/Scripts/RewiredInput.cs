@@ -53,8 +53,8 @@ public class RewiredInput : MonoBehaviour
         
         rightJoystickInput.x = player.GetAxis("Camera Horizontal Movement");
         rightJoystickInput.y = player.GetAxis("Camera Vertical Movement");
-        aButtonPressing = player.GetButton("A");
-        bButtonPressing = player.GetButton("B");
+        aButtonPressing = player.GetButtonDown("A");
+        bButtonPressing = player.GetButtonDown("B");
     }
 
 }

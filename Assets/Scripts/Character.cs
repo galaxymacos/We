@@ -3,20 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCharacter : MonoBehaviour
+public class Character : MonoBehaviour
 {
     #region Variables
     
     public StateMachine movementSM;
-    public State ducking;
+    public State crouching;
     public State standing;
     public State jumping;    
     
+    public float NormalColliderHeight = 1.8f;
+    public float CrouchColliderHeight = 1f;
 
     public float walkSpeed = 3;
     public float walkLimit = 0.3f;
     public float runSpeed = 6;
     public float runLimit = 0.6f;
+    public float crouchSpeed;
+
     
     public float turnSmoothTime = 0.2f;
     private float turnSmoothVelocity;
@@ -32,6 +36,31 @@ public class PlayerCharacter : MonoBehaviour
 
     public Transform groundDetector;
 
+    private readonly int moveParam = Animator.StringToHash("Speed");
+    private readonly int crouchParam = Animator.StringToHash("Crouch");
+
+    #endregion
+
+    #region Properties
+
+    public int CrouchParam => crouchParam;
+
+
+    private float originalHeight;
+    public float ColliderSize
+    {
+        get => GetComponent<CapsuleCollider>().height;
+        set
+        {
+            var collider = GetComponent<CapsuleCollider>();
+            var center = collider.center;
+            center.y = (value - originalHeight) / 2;
+            collider.center = center;
+            collider.height = value;
+
+        }
+    }
+
     #endregion
 
     #region Reference
@@ -43,6 +72,7 @@ public class PlayerCharacter : MonoBehaviour
     #endregion
 
     private float playerFacingDegree;
+    
 
 
     #region Methods
@@ -120,14 +150,15 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Start()
     {
+        originalHeight = GetComponent<CapsuleCollider>().height;
         ResetMoveDirection();
         rb = GetComponent<Rigidbody>();
         movementSM = new StateMachine();
 
         standing = new CharacterStandingState(movementSM, this);
-        ducking = new CharacterDuckingState(movementSM, this);
+        crouching = new CharacterCrouchingState(movementSM, this);
         jumping = new CharacterJumpingState(movementSM, this);
-        
+
         movementSM.Initialize(standing);
     }
 

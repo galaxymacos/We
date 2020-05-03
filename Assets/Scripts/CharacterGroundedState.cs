@@ -3,9 +3,10 @@
 public class CharacterGroundedState : State
 {
     public Vector2 moveVector;
+    protected float speed;
     
-    public PlayerCharacter character;
-    public CharacterGroundedState(StateMachine stateMachine, PlayerCharacter character) : base(stateMachine)
+    public Character character;
+    public CharacterGroundedState(StateMachine stateMachine, Character character) : base(stateMachine)
     {
         this.character = character;
     }

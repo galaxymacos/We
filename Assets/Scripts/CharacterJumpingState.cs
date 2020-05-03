@@ -6,8 +6,8 @@ public class CharacterJumpingState : State
     private int jumpParam = Animator.StringToHash("Jump");
     private int landParam = Animator.StringToHash("Land");
 
-    private PlayerCharacter character;
-    public CharacterJumpingState(StateMachine stateMachine, PlayerCharacter character) : base(stateMachine)
+    private Character character;
+    public CharacterJumpingState(StateMachine stateMachine, Character character) : base(stateMachine)
     {
         this.character = character;
     }

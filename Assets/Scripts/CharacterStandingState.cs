@@ -6,7 +6,7 @@ public class CharacterStandingState : CharacterGroundedState
     private bool crouch;
     private float speed;
 
-    public CharacterStandingState(StateMachine stateMachine, PlayerCharacter character) : base(stateMachine, character)
+    public CharacterStandingState(StateMachine stateMachine, Character character) : base(stateMachine, character)
     {
         
     }
@@ -34,7 +34,7 @@ public class CharacterStandingState : CharacterGroundedState
         base.LogicUpdate();
         if (crouch)
         {
-            // stateMachine.ChangeState(playerCharacter.);
+            stateMachine.ChangeState(character.crouching);
         }
         else if (jump)
         {
