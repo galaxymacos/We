@@ -8,7 +8,7 @@ public class RoomSpawner : MonoBehaviour
 {
     public OpeningDirection openingDirection;
 
-    private bool spawned = false;
+    public bool spawned = false;
 
     public GameObject Spawn()
     {
@@ -35,10 +35,14 @@ public class RoomSpawner : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         print("collider with " + other.name);
-        if (other.CompareTag("SpawnPoint") && other.GetComponent<RoomSpawner>().spawned)
+        if (other.CompareTag("SpawnPoint"))
         {
+            // if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
+            // {
+                // Instantiate(RoomTemplates.instance.closedRooms[Random.Range(0, RoomTemplates.instance.closedRooms.Length)], transform.position, Quaternion.identity);
+            // }
             print("Destroy spawn point");
-            Destroy(gameObject);
+            spawned = true;
         }
     }
 }

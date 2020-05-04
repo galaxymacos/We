@@ -10,6 +10,8 @@ public class RoomTemplates : MonoBehaviour
     public GameObject[] westRooms;
     public GameObject[] eastRooms;
 
+    public GameObject[] closedRooms;
+
     private void Awake()
     {
         if (instance == null)
